@@ -1,0 +1,28 @@
+name: "🧭 Problem with a country pack / Problema con el paquete de un país"
+description: "Sea marks that are in OpenStreetMap but missing here, in the wrong country, or very out of date. / Señales que están en OpenStreetMap pero faltan aquí, salen en otro país o están muy desfasadas."
+title: "[Pack] "
+labels: ["pack"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If the sea mark is wrong **in OpenStreetMap itself**, please fix it at openstreetmap.org: it will arrive here with the next release.
+        Si la señal está mal **en el propio OpenStreetMap**, corrígela en openstreetmap.org: llegará aquí en la próxima release.
+  - type: input
+    id: country
+    attributes:
+      label: "Country / País"
+      placeholder: "Portugal (PT)"
+    validations:
+      required: true
+  - type: input
+    id: osm
+    attributes:
+      label: "OpenStreetMap link / Enlace a OpenStreetMap"
+      placeholder: "https://www.openstreetmap.org/node/123456789"
+  - type: textarea
+    id: what
+    attributes:
+      label: "What is wrong / Qué está mal"
+    validations:
+      required: true

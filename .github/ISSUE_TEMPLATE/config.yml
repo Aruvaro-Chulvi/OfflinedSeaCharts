@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "Offlined"
+    url: "https://www.offlined.org"
+    about: "Offlined Sea Charts is part of the Offlined project. / Offlined Sea Charts es parte del proyecto Offlined."
+  - name: "OpenStreetMap — fix a wrong or missing sea mark / corregir una señal mal puesta o que falta"
+    url: "https://www.openstreetmap.org/fixthemap"
+    about: "The data comes from OpenStreetMap: fix it there and it arrives here with the next release. / Los datos son de OpenStreetMap: corrígelo allí y llegará aquí en la próxima release."

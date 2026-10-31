@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use Offlined Sea Charts, credit OpenStreetMap as below, together with this project."
+type: dataset
+title: "Offlined Sea Charts"
+abstract: >-
+  The sea marks of OpenStreetMap (lighthouses, buoys, beacons, harbours, anchorages and hazards) as one small
+  pack per country, ready to use offline. A project of Offlined. Data © OpenStreetMap contributors, ODbL 1.0.
+  Not for navigation.
+authors:
+  - given-names: "Álvaro"
+    family-names: "C. Chulvi"
+    affiliation: "Offlined"
+    website: "https://www.offlined.org"
+repository-code: "https://github.com/Aruvaro-Chulvi/OfflinedSeaCharts"
+url: "https://www.offlined.org"
+license: ODbL-1.0
+keywords:
+  - OpenStreetMap
+  - seamarks
+  - nautical charts
+  - OpenSeaMap
+  - offline
+  - Offlined
+references:
+  - type: database
+    title: "OpenStreetMap"
+    authors:
+      - name: "OpenStreetMap contributors"
+    url: "https://www.openstreetmap.org/copyright"

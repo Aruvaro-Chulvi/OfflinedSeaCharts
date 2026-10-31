@@ -1,0 +1,33 @@
+name: "⬇️ Download problem / Problema de descarga"
+description: "A country's charts do not download or say they are damaged. / Las cartas de un país no se descargan o dicen que están dañadas."
+title: "[Download] "
+labels: ["download"]
+body:
+  - type: input
+    id: country
+    attributes:
+      label: "Country / País"
+      placeholder: "Spain (ES) / España (ES)"
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: "Where / Dónde"
+      options:
+        - "From Offlined (Seas & Oceans → Nautical charts) / Desde Offlined (Mares y Océanos → Cartas náuticas)"
+        - "By hand from the release page / A mano desde la página de la release"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "Offlined version / Versión de Offlined"
+      placeholder: "3.0.0"
+  - type: textarea
+    id: what
+    attributes:
+      label: "What happens / Qué pasa"
+      description: "The message you see. / El mensaje que sale."
+    validations:
+      required: true

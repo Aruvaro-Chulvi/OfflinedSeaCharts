@@ -1,0 +1,5 @@
+scripts/work/
+__pycache__/
+*.log
+*.json.gz
+private/
