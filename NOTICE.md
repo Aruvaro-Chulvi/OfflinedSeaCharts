@@ -22,8 +22,8 @@ not add technical restrictions. Maps or other *Produced Works* made from them on
 ## Sources
 
 - **OpenStreetMap** — © OpenStreetMap contributors, [ODbL 1.0](https://www.openstreetmap.org/copyright).
-  Queried through the public [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) instances
-  (overpass-api.de, overpass.private.coffee, maps.mail.ru), once per release, one query at a time per server.
+  Taken once per release from the weekly planet file (planet.openstreetmap.org and its mirrors), or, as an
+  alternative, from the public [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) instances.
 - **Country zones** used to split the planet into countries — Flanders Marine Institute (2024), *Marine
   Regions «eez_land»: union of world country boundaries and EEZ*, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
   www.marineregions.org (simplified by

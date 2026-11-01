@@ -1,4 +1,7 @@
-"""Reparte por países lo bajado con fetch_tiles.py y prepara la release.
+"""Reparte por países las señales y prepara la release.
+
+Fuente: work/planet/seamarks.json.gz (extract_pbf.py, del planeta de OSM) si existe;
+si no, los cuadros de work/tiles/ (fetch_tiles.py, de Overpass).
 
 Cada señal va a todos los países en cuya zona cae (Marine Regions «eez_land»:
 tierra + zona económica exclusiva; en la frontera dos zonas pueden solaparse),
@@ -26,7 +29,11 @@ REPO = "Aruvaro-Chulvi/OfflinedSeaCharts"
 
 
 def main(tag: str) -> None:
-    date = (WORK / "fetched.txt").read_text(encoding="utf-8").strip()
+    planet = WORK / "planet" / "seamarks.json.gz"
+    if planet.exists():
+        sources, date = [planet], (WORK / "planet" / "date.txt").read_text(encoding="utf-8").strip()
+    else:
+        sources, date = sorted((WORK / "tiles").glob("*.json.gz")), (WORK / "fetched.txt").read_text(encoding="utf-8").strip()
     zones = json.loads(ZONES.read_text(encoding="utf-8"))["zones"]
     polys, owner = [], []
     for iso, z in zones.items():
@@ -37,7 +44,7 @@ def main(tag: str) -> None:
 
     # Todas las señales, una vez (los cuadros vecinos no se solapan, pero por si acaso)
     feats = {}
-    for p in sorted((WORK / "tiles").glob("*.json.gz")):
+    for p in sources:
         with gzip.open(p, "rt", encoding="utf-8") as f:
             for x in json.load(f):
                 if x["lon"] is None or x["lat"] is None:

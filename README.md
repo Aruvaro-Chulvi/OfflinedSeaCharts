@@ -18,7 +18,7 @@ lighthouses, buoys, beacons, harbours, anchorages, moorings and hazards (reefs, 
 
 | Release | OSM data from | Countries | Sea marks | All packs |
 |---|---|---:|---:|---:|
-| `osm-2026-10-31` | 2026-10-31 | ~190 | ~1,000,000 | 🛠️ Being built: the planet is being fetched from OpenStreetMap |
+| [`osm-2026-10-26`](../../releases/tag/osm-2026-10-26) | 2026-10-26 | 195 | 1,016,643 | 22.4 MB |
 
 - **`seamarks-<ISO>.json.gz`** (in [Releases](../../releases)): `{"key", "date", "count", "features": [[id, lon, lat, {tags}], …]}`.
   `id` is the OpenStreetMap element (`node/123`, `way/456`, ways as their centre) and `tags` are its OSM
@@ -34,9 +34,9 @@ border can be in two packs.
 ### Why
 
 Offlined used to ask the public Overpass servers for each country from every user's computer. Those
-servers are shared and often full, so downloads failed. Now the planet is fetched **once per release**,
-slowly and one query at a time, and everyone downloads the result from GitHub. Offlined still falls back
-to Overpass for a country that is not in the latest release.
+servers are shared and often full, so downloads failed. Now the sea marks are taken **once per release**
+from the OpenStreetMap planet file, and everyone downloads the result from GitHub. Offlined still falls
+back to Overpass for a country that is not in the latest release.
 
 ### In Offlined
 
@@ -46,13 +46,18 @@ of each pack and stores it in its local database.
 
 ### Rebuild it
 
-The scripts in [`scripts/`](scripts) (Python 3.11, `pip install requests shapely`) rebuild everything:
+The scripts in [`scripts/`](scripts) (Python 3.11, `pip install osmium requests shapely`, ~200 GB free)
+rebuild everything:
 
 ```bash
 cd scripts
-python fetch_tiles.py 0/2 & python fetch_tiles.py 1/2   # planet in 10° tiles, a few hours, resumable
+python download_planet.py                                # OSM planet (~95 GB) from several mirrors, MD5 checked
+python extract_pbf.py work/planet/planet-latest.osm.pbf  # only the sea marks → work/planet/seamarks.json.gz
 python build_packs.py osm-YYYY-MM-DD                     # → work/release/ (packs + manifest.json)
 ```
+
+Without the big download, `fetch_tiles.py 0/2` and `fetch_tiles.py 1/2` ask the public Overpass servers
+for the planet in 10° tiles instead (resumable, but it depends on those servers being up).
 
 The country zones come from `chart_zones.json`, made by
 [`build_chart_zones.py`](https://github.com/Aruvaro-Chulvi/OfflinedSeafloor/blob/main/scripts/build_chart_zones.py)
@@ -80,7 +85,7 @@ faros, boyas, balizas, puertos, fondeaderos, amarres y peligros (arrecifes, bajo
 
 | Release | Datos de OSM del | Países | Señales | Todos los paquetes |
 |---|---|---:|---:|---:|
-| `osm-2026-10-31` | 31-10-2026 | ~190 | ~1.000.000 | 🛠️ En preparación: se está bajando el planeta de OpenStreetMap |
+| [`osm-2026-10-26`](../../releases/tag/osm-2026-10-26) | 26-10-2026 | 195 | 1.016.643 | 22,4 MB |
 
 - **`seamarks-<ISO>.json.gz`** (en [Releases](../../releases)): `{"key", "date", "count", "features": [[id, lon, lat, {etiquetas}], …]}`.
   `id` es el elemento de OpenStreetMap (`node/123`, `way/456`, las vías por su centro) y las etiquetas son
@@ -97,9 +102,9 @@ una frontera puede estar en dos paquetes.
 ### Por qué
 
 Antes Offlined pedía cada país a los servidores públicos de Overpass desde el ordenador de cada usuario.
-Esos servidores son compartidos y se llenan a menudo, y las descargas fallaban. Ahora el planeta se baja
-**una vez por release**, despacio y de consulta en consulta, y todo el mundo descarga el resultado de
-GitHub. Si un país no está en la última release, Offlined sigue pidiéndolo a Overpass.
+Esos servidores son compartidos y se llenan a menudo, y las descargas fallaban. Ahora las señales se
+sacan **una vez por release** del archivo del planeta de OpenStreetMap, y todo el mundo descarga el
+resultado de GitHub. Si un país no está en la última release, Offlined sigue pidiéndolo a Overpass.
 
 ### En Offlined
 
@@ -109,8 +114,10 @@ cada paquete y lo guarda en su base de datos local.
 
 ### Regenerarlo
 
-Los pasos están arriba, en inglés: `fetch_tiles.py` baja el planeta en cuadros de 10° (unas horas, se puede
-continuar si se corta) y `build_packs.py` reparte por países y escribe la release en `work/release/`.
+Los pasos están arriba, en inglés: `download_planet.py` baja el planeta de OSM (~95 GB, de varios espejos
+a la vez, con MD5), `extract_pbf.py` saca solo las señales y `build_packs.py` reparte por países y escribe
+la release en `work/release/`. Sin la descarga grande, `fetch_tiles.py` se lo pide a Overpass en cuadros
+de 10° (depende de que esos servidores funcionen).
 
 ### Corregir los datos
 

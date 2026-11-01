@@ -59,9 +59,11 @@ PART, PARTS = 0, 1    # este proceso hace los cuadros PART, PART+PARTS…
 
 
 def ask(q: str) -> dict:
-    """Respuesta de Overpass; TooBig si el cuadro no cabe; reintenta lo demás."""
-    wait = 30
-    for attempt in range(12):
+    """Respuesta de Overpass; TooBig si el cuadro no cabe. Lo demás se reintenta
+    sin rendirse (los servidores a veces caen horas): como mucho cada 10 min."""
+    wait, attempt = 30, -1
+    while True:
+        attempt += 1
         # Primero el servidor principal (admite dos consultas a la vez por IP); los otros, si falla
         ep = ENDPOINTS[attempt % len(ENDPOINTS)]
         try:
@@ -82,7 +84,6 @@ def ask(q: str) -> dict:
         print(f"    {err} @ {ep.split('/')[2]} · espero {wait} s", flush=True)
         time.sleep(wait)
         wait = min(wait * 2, 600)
-    raise RuntimeError("Overpass no responde")
 
 
 def tile_path(w, s, step) -> Path:
