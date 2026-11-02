@@ -14,6 +14,10 @@ The packs are an extract of the **OpenStreetMap** database, so they are a *Deriv
 as you credit OpenStreetMap, keep the packs (and any database you derive from them) under the ODbL and do
 not add technical restrictions. Maps or other *Produced Works* made from them only need the attribution.
 
+**Offlined** (the application by Álvaro C. Chulvi and Eric Uguet, https://www.offlined.org) is authorized by
+the author to use the build scripts, also for commercial purposes. The packs stay under the ODbL for
+everyone, Offlined included.
+
 ## How to credit
 
 > Sea marks © OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright) — packaged by
